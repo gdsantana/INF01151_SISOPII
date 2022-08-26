@@ -46,8 +46,23 @@ async def web_socket_router(websocket, path):
         await websocket.close(reason=f'needs a path')
     elif path == '/echo':
         await echo(websocket)
+    elif path == '/chat':
+        await chat(websocket)
     else:
         await websocket.close(reason=f'path not found: {path}')
+
+async def chat(websocket,sessions={}):
+    remote = websocket.remote_address
+    sessions[remote] = websocket
+
+    try:
+        async for message in websocket:
+            for socket in sessions.values():
+                await socket.send(message)
+    finally:
+        del sessions[remote]
+            for socket in sessions.values():
+                await socket.send(message)
 
 
 async def main():
