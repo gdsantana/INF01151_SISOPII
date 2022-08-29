@@ -11,4 +11,37 @@ message SumReply {
 
 service Calculator {
   rpc Sum (SumRequest) returns (SumReply);
+  rpc Multiply (MultiplyRequest) returns (SumReply);
+  rpc Max3 (Max3Request) returns (SumReply);
+  rpc DivMod (DivModRequest) returns (DivModReply);
+}
+
+message MultiplyRequest {
+  double a = 1;
+  double b = 2;
+}
+
+message MultiplyReply {
+  double s = 1;
+}
+
+message Max3Request {
+  double a = 1;
+  double b = 2;
+  double c = 3;
+}
+
+message Max3Reply {
+  double s = 1;
+}
+
+
+message DivModRequest {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message DivModReply {
+  int32 div = 1;
+  int32 mod = 2;
 }

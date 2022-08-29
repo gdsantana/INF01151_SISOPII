@@ -55,3 +55,50 @@ def test_sum(calculator_client):
 
     # then
     assert result.s == expected
+
+def test_multiply(calculator_client):
+    from calculator_pb2 import MultiplyRequest
+
+    # given
+    a = 6273
+    b = 5.123
+
+    expected = a * b
+
+    # when
+    result = calculator_client.Multiply(MultiplyRequest(a=a, b=b))
+
+    # then
+    assert result.s == expected
+
+def test_max3(calculator_client):
+    from calculator_pb2 import Max3Request
+
+    # given
+    a = 1671
+    b = -2.231
+    c = 0.1231
+
+    expected = max(a,b,c)
+
+    # when
+    result = calculator_client.Max3(Max3Request(a=a, b=b, c=c))
+
+    # then
+    assert result.s == expected
+
+def test_divMod(calculator_client):
+    from calculator_pb2 import DivModRequest
+
+    # given
+    a = 342
+    b = 24
+
+    expected = a//b , a%b
+
+    # when
+    result = calculator_client.DivMod(DivModRequest(a=a, b=b))
+    print(result)
+
+    # then
+    assert result.div, result.mod == expected
